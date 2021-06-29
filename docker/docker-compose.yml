@@ -1,0 +1,7 @@
+version: '2.0'
+services:
+  sgt-postgresql:
+    extends:
+      file: sgt-postgresql.yml
+      service: sgt-postgresql
+    container_name: sgt-postgresql

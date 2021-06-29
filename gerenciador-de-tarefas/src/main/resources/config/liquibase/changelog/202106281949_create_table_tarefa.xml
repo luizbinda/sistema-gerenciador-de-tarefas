@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202106281949-1" author="luiz.pimenta" >
+        <createTable tableName="tarefa">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="titulo" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_inicio_prevista" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_termino_prevista" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_inicio" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comentarios" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="seq_tarefa" startValue="1" incrementBy="1" />
+    </changeSet>
+
+</databaseChangeLog>
