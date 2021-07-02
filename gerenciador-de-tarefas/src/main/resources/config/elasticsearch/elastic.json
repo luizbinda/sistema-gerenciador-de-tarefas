@@ -1,0 +1,16 @@
+{
+    "index": {
+        "analysis": {
+            "analyzer": {
+                "trim_case_insensitive": {
+                    "tokenizer": "keyword",
+                    "filter": [
+                        "lowercase",
+                        "trim",
+                        "asciifolding"
+                    ]
+                }
+            }
+        }
+    }
+}

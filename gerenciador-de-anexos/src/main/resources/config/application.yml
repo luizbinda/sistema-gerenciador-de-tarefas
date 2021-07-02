@@ -1,0 +1,15 @@
+application:
+  appName: Sistema Gerenciador de Anexos
+  minio:
+    bucket: anexos
+    user: sgt123456
+    password: sgt123456
+    url: http://localhost:9000
+
+spring:
+  application: gerenciadordeanexos
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always

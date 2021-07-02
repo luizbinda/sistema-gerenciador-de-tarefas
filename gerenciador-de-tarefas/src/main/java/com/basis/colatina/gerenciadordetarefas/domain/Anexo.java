@@ -24,7 +24,7 @@ import java.io.Serializable;
 public class Anexo implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_anexo")
-  @SequenceGenerator(name = "seq_user", allocationSize = 1, sequenceName = "seq_user")
+  @SequenceGenerator(name = "seq_anexo", allocationSize = 1, sequenceName = "seq_anexo")
   @Column(name = "id")
   private Integer id;
 

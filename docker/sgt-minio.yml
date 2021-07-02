@@ -1,0 +1,10 @@
+version: '2'
+services:
+  sgt-minio:
+    image: minio/minio
+    environment:
+      - "MINIO_ROOT_USER=sgt123456"
+      - "MINIO_ROOT_PASSWORD=sgt123456"
+    ports:
+      - 9000:9000
+    command: server /data

@@ -10,7 +10,7 @@ public interface EntityMapper<Entity, DTO> {
 
   Iterable<DTO> iterableToDTO(Iterable<Entity> entities);
 
-  List<DTO> ToDTO(List<Entity> entities);
+  List<DTO> toDTO(List<Entity> entities);
 
-  List<Entity> ToEntity(List<DTO> dtos);
+  List<Entity> toEntity(List<DTO> dtos);
 }

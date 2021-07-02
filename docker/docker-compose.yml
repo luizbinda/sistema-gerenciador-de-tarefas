@@ -5,3 +5,15 @@ services:
       file: sgt-postgresql.yml
       service: sgt-postgresql
     container_name: sgt-postgresql
+
+  sgt-minio:
+    extends:
+      file: sgt-minio.yml
+      service: sgt-minio
+    container_name: sgt-minio
+
+  sgt-elasticsearch:
+    extends:
+      file: sgt-elasticsearch.yml
+      service: sgt-elasticsearch
+    container_name: sgt-elasticsearch

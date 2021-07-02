@@ -19,9 +19,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "responsavel", schema = "public")
 public class Responsavel implements Serializable {
+
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_responsavel")
-  @SequenceGenerator(name = "seq_user", allocationSize = 1, sequenceName = "seq_user")
+  @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq_responsavel")
+  @SequenceGenerator(name = "seq_responsavel", allocationSize = 1, sequenceName = "seq_responsavel")
   @Column(name = "id")
   private Integer id;
 

@@ -21,8 +21,8 @@ import java.time.LocalDate;
 public class Tarefa implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tarefa")
-  @SequenceGenerator(name = "seq_user", allocationSize = 1, sequenceName = "seq_user")
+  @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq_tarefa")
+  @SequenceGenerator(name = "seq_tarefa", allocationSize = 1, sequenceName = "seq_tarefa")
   @Column(name = "id")
   private Integer id;
 
