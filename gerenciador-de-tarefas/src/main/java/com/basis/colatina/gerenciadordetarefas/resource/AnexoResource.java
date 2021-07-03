@@ -1,5 +1,6 @@
 package com.basis.colatina.gerenciadordetarefas.resource;
 
+import com.basis.colatina.gerenciadordetarefas.feing.AnexoClient;
 import com.basis.colatina.gerenciadordetarefas.service.AnexoService;
 import com.basis.colatina.gerenciadordetarefas.service.dto.AnexoDTO;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,7 @@ public class AnexoResource {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<AnexoDTO> delte(@PathVariable Integer id) {
+  public ResponseEntity<AnexoDTO> delete(@PathVariable Integer id) {
     anexoService.delete(id);
     return  new ResponseEntity<>(null, HttpStatus.OK);
   }

@@ -3,6 +3,7 @@ package com.basis.colatina.gerenciadordetarefas.service.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.io.Serializable;
 
 
@@ -21,6 +22,6 @@ public class AnexoDTO implements Serializable {
 
   private String tamanho;
 
-  private TarefaDTO tarefaDTO;
+  private Integer tarefaId;
 
 }

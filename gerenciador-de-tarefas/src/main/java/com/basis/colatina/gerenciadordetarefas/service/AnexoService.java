@@ -34,9 +34,10 @@ public class AnexoService {
     return anexoMapper.toDTO(anexo);
   }
 
-  public AnexoDTO save(AnexoDTO reponsavelDTO) {
-    Anexo anexo = anexoMapper.toEntity(reponsavelDTO);
-    return anexoMapper.toDTO(anexoRepository.save(anexo));
+  public AnexoDTO save(AnexoDTO anexoDTO) {
+    Anexo anexo = anexoMapper.toEntity(anexoDTO);
+    anexoClient.uploadAnexo(anexoDTO);
+    return anexoMapper.toDTO(anexo);
   }
 
   public void delete(Integer id) {

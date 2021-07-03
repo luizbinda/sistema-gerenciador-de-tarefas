@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/anexos")
+@RequestMapping("/api/anexo")
 public class AnexoResource {
   private final AnexoService anexoService;
 
