@@ -1,6 +1,5 @@
 package com.basis.colatina.gerenciadordetarefas.resource;
 
-import com.basis.colatina.gerenciadordetarefas.feing.AnexoClient;
 import com.basis.colatina.gerenciadordetarefas.service.AnexoService;
 import com.basis.colatina.gerenciadordetarefas.service.dto.AnexoDTO;
 import lombok.RequiredArgsConstructor;

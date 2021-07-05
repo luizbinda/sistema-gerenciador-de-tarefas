@@ -2,7 +2,6 @@ package com.basis.colatina.gerenciadordetarefas.service;
 
 
 import com.basis.colatina.gerenciadordetarefas.domain.Responsavel;
-import com.basis.colatina.gerenciadordetarefas.feing.AnexoClient;
 import com.basis.colatina.gerenciadordetarefas.repository.ResponsavelRepository;
 import com.basis.colatina.gerenciadordetarefas.service.dto.ResponsavelDTO;
 import com.basis.colatina.gerenciadordetarefas.service.event.ResponsavelEvent;
@@ -31,7 +30,7 @@ public class ResponsavelService {
 
   public ResponsavelDTO show(Integer id) {
     Responsavel responsavel = responsavelRepository.findById(id).orElseThrow(
-            () -> new RegraNegocioException(ConstantsUtils.USER_NOT_FOUND)
+            () -> new RegraNegocioException(ConstantsUtils.RESPONSAVEL_NOT_FOUND)
     );
     return responsavelMapper.toDTO(responsavel);
   }
@@ -45,7 +44,7 @@ public class ResponsavelService {
 
   public void delete(Integer id) {
     Responsavel responsavel = responsavelRepository.findById(id).orElseThrow(
-            () -> new RegraNegocioException(ConstantsUtils.USER_NOT_FOUND)
+            () -> new RegraNegocioException(ConstantsUtils.RESPONSAVEL_NOT_FOUND)
     );
     responsavelRepository.delete(responsavel);
   }

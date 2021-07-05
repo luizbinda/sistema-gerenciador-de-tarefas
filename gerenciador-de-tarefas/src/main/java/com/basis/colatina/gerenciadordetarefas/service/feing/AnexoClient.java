@@ -1,4 +1,4 @@
-package com.basis.colatina.gerenciadordetarefas.feing;
+package com.basis.colatina.gerenciadordetarefas.service.feing;
 
 import com.basis.colatina.gerenciadordetarefas.service.dto.AnexoDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -7,16 +7,14 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "anexo", url = "${feign.client.anexo.url}")
 public interface AnexoClient {
 
-  String url = "api/anexo";
+  @GetMapping("api/anexo/{hash}")
+  AnexoDTO getAnexo(@PathVariable String hash);
 
-  @GetMapping(url)
-  AnexoDTO getAnexo();
-
-  @PostMapping(url)
+  @PostMapping("api/anexo")
   void uploadAnexo(@RequestBody AnexoDTO anexoDTO);
 
-  @DeleteMapping(url)
-  void deleteAnexo(String hash);
+  @DeleteMapping("api/anexo/{hash}")
+  void deleteAnexo(@PathVariable String hash);
 
 
 }
