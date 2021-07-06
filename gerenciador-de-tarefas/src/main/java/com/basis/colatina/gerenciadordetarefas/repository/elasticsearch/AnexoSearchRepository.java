@@ -1,8 +1,11 @@
 package com.basis.colatina.gerenciadordetarefas.repository.elasticsearch;
 
 import com.basis.colatina.gerenciadordetarefas.domain.elasticsearch.AnexoDocument;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import com.basis.colatina.gerenciadordetarefas.domain.elasticsearch.ResponsavelDocument;
 
-public interface AnexoSearchRepository extends ElasticsearchRepository<AnexoDocument, Integer> {
-
+public interface AnexoSearchRepository extends BasicElasticRepository<AnexoDocument, Integer> {
+    @Override
+    default Class<AnexoDocument> getEntity() {
+        return AnexoDocument.class;
+    }
 }

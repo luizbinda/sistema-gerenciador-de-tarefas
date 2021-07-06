@@ -1,6 +1,7 @@
 package com.basis.colatina.gerenciadordetarefas.service.elasticsearch;
 
 
+import com.basis.colatina.gerenciadordetarefas.repository.elasticsearch.BasicElasticRepository;
 import com.basis.colatina.gerenciadordetarefas.repository.elasticsearch.Reindexer;
 import com.basis.colatina.gerenciadordetarefas.service.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class ElasticsearchReindexService {
   private Integer pageSize;
 
   private final List<Reindexer> reindexadores;
-  private final List<ElasticsearchRepository> repositories;
+  private final List<BasicElasticRepository> repositories;
   private final ElasticsearchRestTemplate elasticsearchTemplate;
 
   @Transactional(readOnly = true)
@@ -58,8 +59,8 @@ public class ElasticsearchReindexService {
       return;
     }
     log.info("Total Pages {}.", page.getTotalPages());
-    ElasticsearchRepository searchRepository = getSearchRepository(page);
-    recreateIndexDocument(searchRepository.getClass());
+    BasicElasticRepository searchRepository = getSearchRepository(page);
+    recreateIndexDocument(searchRepository.getEntity());
 
     while (page.hasContent()) {
       log.info("Page Number {}.", page.getNumber());
@@ -70,17 +71,17 @@ public class ElasticsearchReindexService {
     log.info("Finish reindex of {}.", bean.getEntity());
   }
 
-  private ElasticsearchRepository getSearchRepository(Page<?> page) {
+  private BasicElasticRepository getSearchRepository(Page<?> page) {
     Class documentClass = page.getContent().get(0).getClass();
-    Iterator<ElasticsearchRepository> var3 = this.repositories.iterator();
+    Iterator<BasicElasticRepository> var3 = this.repositories.iterator();
 
-    ElasticsearchRepository searchRepository;
+    BasicElasticRepository searchRepository;
     do {
       if (!var3.hasNext()) {
         throw new RegraNegocioException("Falha de Reindexação...");
       }
       searchRepository = var3.next();
-    } while(!searchRepository.getClass().equals(documentClass));
+    } while(!searchRepository.getEntity().equals(documentClass));
 
     return searchRepository;
   }
