@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +30,7 @@ public class ElasticsearchReindexService {
   private final List<Reindexer> reindexadores;
   private final List<BasicElasticRepository> repositories;
   private final ElasticsearchRestTemplate elasticsearchTemplate;
+  private final ElasticsearchOperations elasticsearchOperations;
 
   @Transactional(readOnly = true)
   @Async
@@ -88,8 +89,8 @@ public class ElasticsearchReindexService {
 
   private <T> void recreateIndexDocument(Class<T> entityClass) {
     log.info("Recriate index class: {}", entityClass.getName());
-    elasticsearchTemplate.deleteIndex(entityClass);
-    elasticsearchTemplate.createIndex(entityClass);
+    elasticsearchOperations.indexOps(entityClass).delete();
+    elasticsearchOperations.indexOps(entityClass).create();
     elasticsearchTemplate.putMapping(entityClass);
   }
 

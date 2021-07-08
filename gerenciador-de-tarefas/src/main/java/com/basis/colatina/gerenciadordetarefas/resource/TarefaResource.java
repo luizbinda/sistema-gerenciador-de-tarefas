@@ -26,22 +26,22 @@ public class TarefaResource {
 
   @GetMapping
   public ResponseEntity<List<TarefaDTO>> index() {
-    return  new ResponseEntity<List<TarefaDTO>>(tarefaService.index(), HttpStatus.OK);
+    return  new ResponseEntity<>(tarefaService.index(), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<TarefaDTO> show(@PathVariable Integer id) {
-    return  new ResponseEntity<TarefaDTO>(tarefaService.show(id), HttpStatus.OK);
+    return  new ResponseEntity<>(tarefaService.show(id), HttpStatus.OK);
   }
 
   @PostMapping
   public ResponseEntity<TarefaDTO> save(@RequestBody @Valid TarefaDTO tarefaDTO) {
-    return  new ResponseEntity<TarefaDTO>(tarefaService.save(tarefaDTO), HttpStatus.CREATED);
+    return  new ResponseEntity<>(tarefaService.save(tarefaDTO), HttpStatus.CREATED);
   }
 
   @PutMapping
   public ResponseEntity<TarefaDTO> update(@RequestBody @Valid TarefaDTO tarefaDTO) {
-    return  new ResponseEntity<TarefaDTO>(tarefaService.save(tarefaDTO), HttpStatus.OK);
+    return  new ResponseEntity<>(tarefaService.save(tarefaDTO), HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")

@@ -7,4 +7,5 @@ public interface ResponsavelSearchRepository extends BasicElasticRepository<Resp
     default Class<ResponsavelDocument> getEntity() {
         return ResponsavelDocument.class;
     }
+
 }

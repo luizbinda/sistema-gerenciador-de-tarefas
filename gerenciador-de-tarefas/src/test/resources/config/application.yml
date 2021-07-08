@@ -1,0 +1,33 @@
+logging:
+  level:
+    ROOT: INFO
+    liquibase: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.type: INFO
+    org.h2: INFO
+
+application:
+  appName: Sistema Gerenciador de Tarefas
+  elasticsearch:
+    url: localhost:9200
+
+spring:
+  application:
+    name: gerenciadordetarefas
+  profiles:
+    active: test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:db
+  liquibase:
+    change-log: classpath:/config/liquibase/master.xml
+#    drop-first: true
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+feign:
+  client:
+    anexo:
+      url: http://localhost:8081

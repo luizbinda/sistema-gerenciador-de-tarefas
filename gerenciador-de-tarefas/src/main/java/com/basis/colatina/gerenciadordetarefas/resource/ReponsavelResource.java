@@ -2,7 +2,12 @@ package com.basis.colatina.gerenciadordetarefas.resource;
 
 import com.basis.colatina.gerenciadordetarefas.service.ResponsavelService;
 import com.basis.colatina.gerenciadordetarefas.service.dto.ResponsavelDTO;
+import com.basis.colatina.gerenciadordetarefas.service.elasticsearch.ResponsavelElasticSearchService;
+import com.basis.colatina.gerenciadordetarefas.service.filter.ResponsavelFilter;
 import lombok.RequiredArgsConstructor;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 import javax.validation.Valid;
 
 @RestController
@@ -23,24 +27,24 @@ public class ReponsavelResource {
 
   private final ResponsavelService responsavelService;
 
-  @GetMapping
-  public ResponseEntity<List<ResponsavelDTO>> index() {
-    return  new ResponseEntity<List<ResponsavelDTO>>(responsavelService.index(), HttpStatus.OK);
+  @PostMapping("index")
+  public ResponseEntity<Page<ResponsavelDTO>> index(@RequestBody ResponsavelFilter filter, Pageable pageable) {
+    return  new ResponseEntity<>(responsavelService.index(filter, pageable), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<ResponsavelDTO> show(@PathVariable Integer id) {
-    return  new ResponseEntity<ResponsavelDTO>(responsavelService.show(id), HttpStatus.OK);
+    return  new ResponseEntity<>(responsavelService.show(id), HttpStatus.OK);
   }
 
   @PostMapping
   public ResponseEntity<ResponsavelDTO> save(@RequestBody @Valid ResponsavelDTO responsavelDTO) {
-    return  new ResponseEntity<ResponsavelDTO>(responsavelService.save(responsavelDTO), HttpStatus.CREATED);
+    return  new ResponseEntity<>(responsavelService.save(responsavelDTO), HttpStatus.CREATED);
   }
 
   @PutMapping
   public ResponseEntity<ResponsavelDTO> update(@RequestBody @Valid ResponsavelDTO responsavelDTO) {
-    return  new ResponseEntity<ResponsavelDTO>(responsavelService.save(responsavelDTO), HttpStatus.OK);
+    return  new ResponseEntity<>(responsavelService.save(responsavelDTO), HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")

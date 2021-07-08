@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.InnerField;
 import org.springframework.data.elasticsearch.annotations.MultiField;
 
-@Document(indexName = "gerenciador-de-tarefas-responsavel")
+@Document(indexName = "gerenciador-de-tarefas-anexo")
 public class AnexoDocument extends BaseDocument {
 
   private static final String SORT = "sort";

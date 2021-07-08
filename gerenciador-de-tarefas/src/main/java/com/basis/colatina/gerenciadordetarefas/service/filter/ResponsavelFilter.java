@@ -13,7 +13,8 @@ public class ResponsavelFilter implements BaseFilter, Serializable {
   public BoolQueryBuilder getFilter() {
     BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
 
-    addShouldTermQuery(queryBuilder, "stringId", query);
+    addShouldTermQuery(queryBuilder, "nome", query);
+    addShouldTermQuery(queryBuilder, "email", query);
 
     return queryBuilder;
   }

@@ -4,7 +4,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 
 import java.time.LocalDate;
 
-@Document(indexName = "gerenciador-de-tarefas-responsavel")
+@Document(indexName = "gerenciador-de-tarefas-tarefa")
 public class TarefaDocument extends BaseDocument {
 
   private static final String SORT = "sort";
