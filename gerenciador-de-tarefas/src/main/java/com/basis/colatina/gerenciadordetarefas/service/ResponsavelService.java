@@ -12,13 +12,9 @@ import com.basis.colatina.gerenciadordetarefas.service.mapper.ResponsavelListMap
 import com.basis.colatina.gerenciadordetarefas.service.mapper.ResponsavelMapper;
 import com.basis.colatina.gerenciadordetarefas.service.utils.ConstantsUtils;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

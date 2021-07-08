@@ -20,7 +20,8 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Integer>, Reinde
             "t.comentarios," +
             "t.tipo," +
             "t.titulo," +
-            "t.descricao" +
+            "t.descricao," +
+            "t.responsavel.nome" +
             ") from Tarefa t" +
             " where t.id = :id"
     )
@@ -36,7 +37,8 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Integer>, Reinde
             "t.comentarios," +
             "t.tipo," +
             "t.titulo," +
-            "t.descricao" +
+            "t.descricao," +
+            "t.responsavel.nome" +
             ") from Tarefa t ORDER BY t.id"
     )
     Page<TarefaDocument> reindexPage(Pageable pageable);

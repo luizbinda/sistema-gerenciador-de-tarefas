@@ -29,4 +29,6 @@ public class TarefaDTO implements Serializable {
 
   private String descricao;
 
+  private Integer responsavelId;
+
 }

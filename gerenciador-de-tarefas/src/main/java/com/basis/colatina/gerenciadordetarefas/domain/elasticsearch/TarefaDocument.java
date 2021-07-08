@@ -49,7 +49,9 @@ public class TarefaDocument extends BaseDocument {
   )
   private String descricao;
 
-  public TarefaDocument(Integer id, LocalDate dataInicio, LocalDate dataInicioPrevista, LocalDate dataTerminoPrevista, String status, String comentarios, String tipo, String titulo, String descricao) {
+  private String responsavel;
+
+  public TarefaDocument(Integer id, LocalDate dataInicio, LocalDate dataInicioPrevista, LocalDate dataTerminoPrevista, String status, String comentarios, String tipo, String titulo, String descricao, String responsavel) {
     super(id);
     this.dataInicio = dataInicio;
     this.dataInicioPrevista = dataInicioPrevista;
@@ -59,5 +61,6 @@ public class TarefaDocument extends BaseDocument {
     this.tipo = tipo;
     this.titulo = titulo;
     this.descricao = descricao;
+    this.responsavel = responsavel;
   }
 }
