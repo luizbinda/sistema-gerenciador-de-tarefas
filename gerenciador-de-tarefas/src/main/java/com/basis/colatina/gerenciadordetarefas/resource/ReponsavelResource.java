@@ -27,7 +27,7 @@ public class ReponsavelResource {
 
   private final ResponsavelService responsavelService;
 
-  @PostMapping("index")
+  @PostMapping("/index")
   public ResponseEntity<Page<ResponsavelDTO>> index(@RequestBody ResponsavelFilter filter, Pageable pageable) {
     return  new ResponseEntity<>(responsavelService.index(filter, pageable), HttpStatus.OK);
   }

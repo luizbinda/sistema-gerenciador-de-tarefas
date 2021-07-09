@@ -11,14 +11,15 @@ import java.io.Serializable;
 @Setter
 public class ResponsavelFilter implements BaseFilter, Serializable {
 
-  private String query;
+  private String nome;
+  private String email;
 
   @Override
   public BoolQueryBuilder getFilter() {
     BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
 
-    addShouldTermQuery(queryBuilder, "nome", query);
-    addShouldTermQuery(queryBuilder, "email", query);
+    addShouldTermQuery(queryBuilder, "nome", nome);
+    addShouldTermQuery(queryBuilder, "email", email);
 
     return queryBuilder;
   }
