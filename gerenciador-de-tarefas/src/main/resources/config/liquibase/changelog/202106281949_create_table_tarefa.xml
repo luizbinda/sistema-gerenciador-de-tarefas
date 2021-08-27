@@ -33,8 +33,19 @@
             <column name="comentarios" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="responsavel_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
         </createTable>
         <createSequence sequenceName="seq_tarefa" startValue="1" incrementBy="1" />
+        <addForeignKeyConstraint
+                baseTableName="tarefa"
+                baseColumnNames="responsavel_id"
+                referencedTableName="responsavel"
+                referencedColumnNames="id"
+                constraintName="fk_responsavel"
+        />
     </changeSet>
 
 </databaseChangeLog>

@@ -13,6 +13,7 @@ public class ResponsavelFilter implements BaseFilter, Serializable {
 
   private String nome;
   private String email;
+  private String dataNascimento;
 
   @Override
   public BoolQueryBuilder getFilter() {
@@ -20,6 +21,7 @@ public class ResponsavelFilter implements BaseFilter, Serializable {
 
     addShouldTermQuery(queryBuilder, "nome", nome);
     addShouldTermQuery(queryBuilder, "email", email);
+    addShouldTermQuery(queryBuilder, "dataNascimento", dataNascimento);
 
     return queryBuilder;
   }

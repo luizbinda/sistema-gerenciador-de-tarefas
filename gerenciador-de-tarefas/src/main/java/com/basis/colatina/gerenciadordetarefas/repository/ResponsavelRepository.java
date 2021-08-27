@@ -16,8 +16,8 @@ public interface ResponsavelRepository extends JpaRepository<Responsavel, Intege
   @Query("select new com.basis.colatina.gerenciadordetarefas.domain.elasticsearch.ResponsavelDocument(" +
           "r.id," +
           "r.dataNascimento," +
-          "r.email," +
           "r.nome," +
+          "r.email," +
           "r.status" +
           ") from Responsavel r" +
           " where r.id = :id"
@@ -28,8 +28,8 @@ public interface ResponsavelRepository extends JpaRepository<Responsavel, Intege
   @Query("select new com.basis.colatina.gerenciadordetarefas.domain.elasticsearch.ResponsavelDocument(" +
           "r.id," +
           "r.dataNascimento," +
-          "r.email," +
           "r.nome," +
+          "r.email," +
           "r.status" +
           ") from Responsavel r ORDER BY r.id"
   )

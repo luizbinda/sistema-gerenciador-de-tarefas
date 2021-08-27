@@ -1,0 +1,74 @@
+<p-table
+    #table
+    [columns]="cols"
+    [value]="page.content"
+    [paginator]="true"
+    [rows]="1"
+    [totalRecords]="page.totalElements"
+    [loading]="loading"
+    [lazy]="true"
+    (onLazyLoad)="getAllResponsaveis($event)"
+>
+    <ng-template pTemplate="caption">
+        <div class="flex-between">
+            List of customers
+            <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="table.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns"[pSortableColumn]="col.field">
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th>
+                <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="responsavelFilter.nome"
+                    placeholder="buscar por Nome"
+                    class="p-column-filter"
+                    (blur)="getAllResponsaveis()"
+                >
+            </th>
+            <th>
+                <p-calendar
+                    (onSelect)="onDateSelect($event)"
+                    (onClearClick)="onDateSelect()"
+                    [showButtonBar]="true"
+                    styleClass="p-column-filter"
+                    placeholder="Registration Date"
+                    [readonlyInput]="true"
+                    dateFormat="yy-mm-dd"
+                    (blur)="getAllResponsaveis()"
+                ></p-calendar>
+            </th>
+            <th>
+                <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="responsavelFilter.email"
+                    placeholder="buscar por Email"
+                    class="p-column-filter"
+                    (blur)="getAllResponsaveis()"
+                >
+            </th>
+    </ng-template>
+    <ng-template pTemplate="body" let-car let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{car[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        There are {{page.totalElements}} customers
+    </ng-template>
+</p-table>

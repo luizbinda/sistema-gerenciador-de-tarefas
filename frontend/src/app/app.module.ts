@@ -13,17 +13,20 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { ErrorModule, SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
+import {HomeComponent} from './home/home.component';
+import {ResponsavelService} from './shared-services/responsavel-service';
 
 @NgModule({
     declarations: [
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
-        DiarioErrosComponent
+        DiarioErrosComponent,
+        HomeComponent
     ],
     imports: [
         BlockUIModule.forRoot({
-            message: "Carregando..."
+            message: 'Carregando...'
           }),
         BrowserModule,
         BrowserAnimationsModule,
@@ -39,7 +42,8 @@ import { BlockUIModule } from 'ng-block-ui';
         MenuModule
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        ResponsavelService
     ],
     bootstrap: [AppComponent]
 })

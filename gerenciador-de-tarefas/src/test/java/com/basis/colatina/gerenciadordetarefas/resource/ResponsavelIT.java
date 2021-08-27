@@ -2,6 +2,7 @@ package com.basis.colatina.gerenciadordetarefas.resource;
 
 import com.basis.colatina.gerenciadordetarefas.GerenciadorDeTarefasApplication;
 import com.basis.colatina.gerenciadordetarefas.builder.ResponsavelBuilder;
+import com.basis.colatina.gerenciadordetarefas.config.containers.ContainersFactory;
 import com.basis.colatina.gerenciadordetarefas.domain.Responsavel;
 import com.basis.colatina.gerenciadordetarefas.service.mapper.ResponsavelMapper;
 import com.basis.colatina.gerenciadordetarefas.util.BaseIntTest;
@@ -30,6 +31,8 @@ public class ResponsavelIT extends BaseIntTest {
   private ResponsavelMapper responsavelMapper;
 
   private final String URL = "/api/responsavel";
+
+  public static ContainersFactory containers = ContainersFactory.getInstances();
 
   @Test
   public void storeResponsavel() throws Exception {
