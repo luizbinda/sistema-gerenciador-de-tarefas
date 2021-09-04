@@ -15,6 +15,8 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import {HomeComponent} from './home/home.component';
 import {ResponsavelService} from './shared-services/responsavel-service';
+import {ReactiveFormsModule} from "@angular/forms";
+import {KeyFilterModule} from "primeng";
 
 @NgModule({
     declarations: [
@@ -27,7 +29,7 @@ import {ResponsavelService} from './shared-services/responsavel-service';
     imports: [
         BlockUIModule.forRoot({
             message: 'Carregando...'
-          }),
+        }),
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
@@ -39,7 +41,9 @@ import {ResponsavelService} from './shared-services/responsavel-service';
         ErrorModule,
         VersionTagModule,
         SecurityModule.forRoot(environment.auth),
-        MenuModule
+        MenuModule,
+        ReactiveFormsModule,
+        KeyFilterModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

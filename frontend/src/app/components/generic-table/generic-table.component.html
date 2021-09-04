@@ -1,0 +1,155 @@
+<div class="org">
+    <p-table #table [value]="result.content" [lazy]="true" (onLazyLoad)="refreshTable()" [paginator]="paginator && !customPaginator"
+             [rows]="20" [rowsPerPageOptions]="rowsPerPage" [columns]="columns"
+             [totalRecords]="result.totalElements"
+             [responsive]="true" [scrollable]="true">
+
+        <ng-template pTemplate="caption" *ngIf="showGlobalFilter || multiselect">
+            <form (submit)="$event.preventDefault(); refreshTable()" class="ui-g">
+                <div class="ui-g-12 ui-md-2 global-filter">
+                <span class="ui-float-label" *ngIf="showGlobalFilter">
+                    <input pInputText type="text" [(ngModel)]="globalFilter" name="globalFilter"/>
+                    <label class="float-label" [translate]="MSG.LABELS_FILTER">Filter</label>
+                </span>
+                </div>
+                <p-button class="ui-g-2" type="submit" icon="ui-icon-search" *ngIf="showGlobalFilter"></p-button>
+
+                <div *ngIf="showExportButton" class="ui-g-2">
+                    <button pButton pTooltip="{{ MSG.BUTTON_EXPORT_CSV }}" class="ui-button-rounded" #export icon="ui-icon-print" (click)="exportCsv($event)"></button>
+                </div>
+            </form>
+        </ng-template>
+
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                <col *ngIf="multiselect && !view" [style.width]="'6ch'">
+                <col *ngIf="hasButtons()" [style.width]="(buttons.length * 4) + 'ch'">
+                <col *ngFor="let col of columns"
+                     [style.width]="col.columnWidth || '20ch'">
+            </colgroup>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngIf="multiselect && !view"></th>
+                <th *ngIf="hasButtons()">
+                    <span class="ui-icon-gear"></span>
+                </th>
+                <th *ngFor="let col of columns"
+                    [pSortableColumnDisabled]="col.disableSort"
+                    [pSortableColumn]="col.sortField || col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.sortField || col.field"></p-sortIcon>
+                </th>
+            </tr>
+
+            <tr *ngIf="filters && filters.length > 0">
+                <th *ngIf="multiselect && !view"></th>
+                <th *ngIf="hasButtons()"></th>
+                <th *ngFor="let col of columns" [ngSwitch]="true"
+                    [class.sfiss-table-filter]="getColumnFilter(col).type">
+                <span class="sfiss-table-filter-title">
+                    {{getColumnFilter(col).label}}
+                </span>
+                    <p-checkbox *ngSwitchCase="getColumnFilter(col).type === 'boolean'"
+                                [(ngModel)]="columnFilters[col.field]"
+                                (onChange)="refreshTable()"
+                                pTooltip="{{ getColumnFilter(col).label}}"
+                                tooltipPosition="top"
+                                binary="true">
+                    </p-checkbox>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-coluna>
+            <tr [ngClass]="changeStyleRow(rowData)" [pSelectableRow]="rowData">
+                <td *ngIf="multiselect && !view">
+                    <ng-container>
+                        <p-checkbox #refCheckBox (onChange)="changeRow(rowData, refCheckBox)" binary="true">
+                        </p-checkbox>
+                    </ng-container>
+                </td>
+                <td *ngIf="hasButtons()">
+                    <ng-container *ngFor="let btn of buttons">
+                    <span pTooltip="{{ btn.description }}"
+                          *ngIf="btn.hideButton ? !btn.hideButton(rowData) : true"
+                          tooltipPosition="top"
+                          class="ui-icon-{{btn.icon}} table-button {{getDisableButtonClass(btn, rowData)}}"
+                          (click)="changeAction(rowData, btn, false)"
+                    ></span>
+                    </ng-container>
+                </td>
+                <td *ngFor="let col of columns">
+                    <ng-container *ngIf="!col.type || col.type === 'text'">
+                        <span class="ui-column-title">{{col.header}}</span>
+                        {{coluna[col.field] || '-'}}
+                    </ng-container>
+                    <ng-container *ngIf="col.type === 'date'">
+                        <span class="ui-column-title">{{col.header}}</span>
+                        {{(coluna[col.field] | date: col.pipe) || '-'}}
+                    </ng-container>
+                    <ng-container *ngIf="col.type === 'decimal'">
+                        <span class="ui-column-title">{{col.header}}</span>
+                        {{(coluna[col.field] | number: col.pipe:'pt-BR') || '-'}}
+                    </ng-container>
+                    <ng-container *ngIf="col.type === 'boolean'">
+                        <span class="ui-column-title">{{col.header}}</span>
+                        {{(coluna[col.field] ? 'Ja' : 'Nee') || '-' }}
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td [attr.colspan]="getColumnsLength()">
+                    {{MSG.RECORD_NOT_FOUND}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <div class="p-d-flex p-ai-center">
+            <span class="total-records">
+                {{MSG.TOTAL_RECORDS}}: {{getFirstIndex()}} at {{getLastIndex()}} of {{ result.totalElements }}
+            </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer" *ngIf="customPaginator">
+            <tr>
+                <td [colSpan]="columns.length + 1" colspan="1">
+                    <div class="ui-g-12">
+                        <div class="ui-g-2">
+                            <button pButton class="ui-button" type="button" [disabled]="invalidPreviousPage()" [label]="MSG.PREVIOUS" (click)="previousPage()"></button>
+                        </div>
+                        <div class="ui-g-2"></div>
+                        <div class="ui-g-2" style="text-align: center">
+                            {{MSG.TOTAL_RECORDS}}: {{getFirstIndex()}} at {{getLastIndex()}}
+                        </div>
+                        <div class="ui-g-1">
+                            <p-dropdown [options]="rowsPerPageSelect" [appendTo]="'body'" (onChange)="changeRowPerPage($event)">
+                            </p-dropdown>
+                        </div>
+                        <div class="ui-g-3"></div>
+                        <div class="ui-g-2">
+                            <button pButton class="ui-button" type="button" [disabled]="disableNextButton" [label]="MSG.NEXT" (click)="nextPage()"></button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <div style="text-align: right" class="ui-g-6" *ngIf="multiselect">
+        <ng-container *ngFor="let btn of buttons; let index = index">
+            <div class="padding-top-15">
+                <button pButton class="ui-button-rounded header-button" icon="ui-icon-{{btn.icon}} padding-top-15"
+                        pTooltip="{{ btn.description }}"
+                        *ngIf="hideHeaderButton(btn)"
+                        [disabled]="!getSizeSelectedRows() || verifyDisableButton(index)"
+                        (click)="changeAction(null, btn, true)"
+                ></button>
+            </div>
+        </ng-container>
+    </div>
+</div>

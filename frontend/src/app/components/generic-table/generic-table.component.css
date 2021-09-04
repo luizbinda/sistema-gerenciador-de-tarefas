@@ -1,0 +1,54 @@
+.total-records {
+    margin-right: 1rem;
+}
+
+.table-button {
+    margin: 0.1rem;
+    font-size: 14pt;
+    color: #00695C;
+    cursor: pointer;
+}
+
+.table-button-disable {
+    opacity:0.6;
+    cursor: not-allowed;
+}
+
+.header-button {
+    margin-left: 1rem;
+}
+
+.global-filter input {
+    color: white;
+}
+
+.global-filter .ui-float-label {
+    margin-top: 0.4rem;
+}
+
+.global-filter .float-label {
+    color: #ddd;
+}
+
+.margin-buttons {
+    margin-left: 10px;
+}
+
+.row-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sfiss-table-filter-title {
+    display: none !important;
+}
+
+.org {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.padding-top-15 {
+    padding-top: 15px !important;
+}

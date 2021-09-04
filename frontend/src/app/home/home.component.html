@@ -1,74 +1,69 @@
-<p-table
-    #table
-    [columns]="cols"
-    [value]="page.content"
-    [paginator]="true"
-    [rows]="1"
-    [totalRecords]="page.totalElements"
-    [loading]="loading"
-    [lazy]="true"
-    (onLazyLoad)="getAllResponsaveis($event)"
+<app-generic-table class="ui-g-12"
+                   #tableUser
+                   [columns]="COLUMNS"
+                   [buttons]="BUTTONS"
+                   [filters]="FILTERS"
+                   [showGlobalFilter]="true"
+                   (loadItems)="updateTable($event)"
 >
-    <ng-template pTemplate="caption">
-        <div class="flex-between">
-            List of customers
-            <span class="p-input-icon-left p-ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="table.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
-            </span>
+</app-generic-table>
+<app-generic-form [modal]="false">
+    <form class="ui-g ui-fluid"
+          genericFormRef
+          [formGroup]="form" (submit)="saveForm($event)" novalidate>
+        <h1 class="ui-g-12" genericFormHeader>New User</h1>
+
+        <div class="ui-g form-group ui-g-12">
+
+            <div class="ui-g-12">
+                <app-generic-input class="ui-g-12 ui-md-6">
+                    <input
+                        type="text"
+                        pInputText
+                        sInputRef
+                        [maxLength]="10"
+                        [sLabel]="MSG.RESPONSAVEL_NOME"
+                        formControlName="nome"
+                    >
+                </app-generic-input>
+
+                <app-generic-input class="ui-g-12 ui-md-6">
+                    <p-calendar sInputRef
+                                dateFormat="dd-mm-yy"
+                                [sLabel]="MSG.RESPONSAVEL_DATA_NASCIMENTO"
+                                [showIcon]="true"
+                                [touchUI]="isMobile()"
+                                [readonlyInput]="isMobile()"
+                                [inputStyle]="{'width':'90%'}"
+                                formControlName="dataNascimento"
+                    >
+                    </p-calendar>
+                </app-generic-input>
+
+                <app-generic-input class="ui-g-12 ui-md-6">
+                    <input type="text" pInputText sInputRef
+                           [maxLength]="10"
+                           [sLabel]="MSG.RESPONSAVEL_EMAIL"
+                           formControlName="email">
+                </app-generic-input>
+            </div>
         </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns"[pSortableColumn]="col.field">
-                {{col.header}}
-            </th>
-        </tr>
-        <tr>
-            <th>
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
-            <th>
-                <input
-                    pInputText
-                    type="text"
-                    [(ngModel)]="responsavelFilter.nome"
-                    placeholder="buscar por Nome"
-                    class="p-column-filter"
-                    (blur)="getAllResponsaveis()"
-                >
-            </th>
-            <th>
-                <p-calendar
-                    (onSelect)="onDateSelect($event)"
-                    (onClearClick)="onDateSelect()"
-                    [showButtonBar]="true"
-                    styleClass="p-column-filter"
-                    placeholder="Registration Date"
-                    [readonlyInput]="true"
-                    dateFormat="yy-mm-dd"
-                    (blur)="getAllResponsaveis()"
-                ></p-calendar>
-            </th>
-            <th>
-                <input
-                    pInputText
-                    type="text"
-                    [(ngModel)]="responsavelFilter.email"
-                    placeholder="buscar por Email"
-                    class="p-column-filter"
-                    (blur)="getAllResponsaveis()"
-                >
-            </th>
-    </ng-template>
-    <ng-template pTemplate="body" let-car let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                {{car[col.field]}}
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        There are {{page.totalElements}} customers
-    </ng-template>
-</p-table>
+
+        <div class="ui-g ui-g-12" genericFormFooterButtons>
+            <div class="ui-g-6 ui-md-2">
+                <button pButton type="submit"
+                        label="save"
+                        (click)="saveForm($event)"
+                        icon="ui-icon-save"></button>
+            </div>
+
+            <div class="ui-g-6 ui-md-2">
+                <button class="ui-button-secondary"
+                        pButton type="button" label="Limpar Formulario"
+                        (click)="clearForm()"
+                        icon="ui-icon-cancel"></button>
+            </div>
+        </div>
+    </form>
+
+</app-generic-form>

@@ -1,29 +1,17 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {Pageable} from '../utils/pageable';
-import {Page} from '../utils/page';
 import {ResponsavelModel} from '../shared-models/responsavel-model';
+import {BaseEntityService} from '../utils/base-entity-service';
 
 @Injectable()
-export class ResponsavelService {
+export class ResponsavelService extends BaseEntityService<ResponsavelModel, any> {
 
-    private url = 'api/responsavel';
+    getEntity(): string {
+        return 'responsavel';
+    }
 
-    constructor(private http: HttpClient) { }
-
-    getAllResponsaveis(pageable: Pageable, filter?: ResponsavelModel): Observable<Page<ResponsavelModel>> {
-        let params = new HttpParams();
-        params = params.append('size', `${pageable.size}`);
-        params = params.append('page', `${pageable.page}`);
-        if (filter) {
-            Object.keys(filter).forEach(key => {
-                if (filter[key]) {
-                    params = params.append(key, `${filter[key]}`);
-                }
-            });
-        }
-        return this.http.get<Page<ResponsavelModel>>(`${this.url}/index`, {params});
+    constructor(protected http: HttpClient) {
+        super(http);
     }
 
 }

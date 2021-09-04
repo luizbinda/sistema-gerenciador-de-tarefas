@@ -6,22 +6,20 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 public class ResponsavelFilter implements BaseFilter, Serializable {
 
-  private String nome;
-  private String email;
-  private String dataNascimento;
+  protected String query;
 
   @Override
   public BoolQueryBuilder getFilter() {
     BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
-
-    addShouldTermQuery(queryBuilder, "nome", nome);
-    addShouldTermQuery(queryBuilder, "email", email);
-    addShouldTermQuery(queryBuilder, "dataNascimento", dataNascimento);
+    List<String> fields = new ArrayList<>();
+    filterFields(fields, query, queryBuilder, "nome", "email");
 
     return queryBuilder;
   }

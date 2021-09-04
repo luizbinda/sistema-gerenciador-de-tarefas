@@ -27,7 +27,7 @@ public class ReponsavelResource {
 
   private final ResponsavelService responsavelService;
 
-  @GetMapping("/index")
+  @GetMapping("/search")
   public ResponseEntity<Page<ResponsavelDTO>> index(ResponsavelFilter filter, Pageable pageable) {
     return  new ResponseEntity<>(responsavelService.index(filter, pageable), HttpStatus.OK);
   }

@@ -27,12 +27,12 @@ public class ResponsavelDocument extends BaseDocument {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd")
   private LocalDate dataNascimento;
 
-  @MultiField(mainField = @Field(type = FieldType.Text, store = true),
+  @MultiField(mainField = @Field(type = FieldType.Text, store = true, fielddata = true),
           otherFields = {@InnerField(suffix = SORT, type = FieldType.Text, store = true)}
   )
   private String nome;
 
-  @MultiField(mainField = @Field(type = FieldType.Text, store = true),
+  @MultiField(mainField = @Field(type = FieldType.Text, store = true, fielddata = true),
           otherFields = {@InnerField(suffix = SORT, type = FieldType.Text, store = true)}
   )
   private String email;
