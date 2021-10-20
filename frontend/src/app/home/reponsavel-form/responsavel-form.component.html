@@ -1,0 +1,64 @@
+<app-generic-form [modal]="modal">
+    <form class="ui-g ui-fluid"
+          genericFormRef
+          [formGroup]="form"
+          (submit)="saveForm($event)"
+          novalidate
+    >
+        <h1 class="ui-g-12" genericFormHeader>New User</h1>
+
+        <div class="ui-g form-group ui-g-12">
+
+            <div class="ui-g-12">
+                <app-generic-input class="ui-g-12 ui-md-6">
+                    <input
+                        type="text"
+                        pInputText
+                        sInputRef
+                        [sLabel]="MSG.RESPONSAVEL_NOME"
+                        formControlName="nome"
+                    >
+                </app-generic-input>
+
+                <app-generic-input class="ui-g-12 ui-md-6">
+                    <p-calendar sInputRef
+                                dateFormat="dd-mm-yy"
+                                [sLabel]="MSG.RESPONSAVEL_DATA_NASCIMENTO"
+                                [showIcon]="true"
+                                [touchUI]="isMobile()"
+                                [readonlyInput]="isMobile()"
+                                [inputStyle]="{'width':'90%'}"
+                                formControlName="dataNascimento"
+                    >
+                    </p-calendar>
+                </app-generic-input>
+
+                <app-generic-input class="ui-g-12 ui-md-6">
+                    <input type="text" pInputText sInputRef
+                           [sLabel]="MSG.RESPONSAVEL_EMAIL"
+                           formControlName="email">
+                </app-generic-input>
+            </div>
+        </div>
+
+        <div class="ui-g-12 flex-betwee" style="flex-direction: row !important;" genericFormFooterButtons>
+            <div class="ui-g-2">
+                <button pButton type="submit"
+                        label="save"
+                        (click)="saveForm($event)"
+                        [disabled]="!isEdition()"
+                        icon="ui-icon-save"
+                ></button>
+            </div>
+            <div class="ui-g-2">
+                <button class="ui-button-secondary"
+                        pButton type="button"
+                        label="Cancel"
+                        (click)="closeModal()"
+                        icon="ui-icon-cancel"
+                ></button>
+            </div>
+        </div>
+    </form>
+
+</app-generic-form>

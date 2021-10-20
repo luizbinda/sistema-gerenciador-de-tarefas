@@ -72,16 +72,16 @@ export abstract class BaseEntityForm<T> implements OnInit, OnDestroy {
     }
 
     maybeLoadData() {
-        if (!this.modal) {
-            this.route.paramMap.subscribe(_ => {
-                const snapshot = this.route.snapshot;
-                this.entityId = Number(snapshot.paramMap.get('id'));
-                this.editing = snapshot.data.editing;
-                this.loadEntity();
-            });
-        } else {
+        if (this.modal) {
             this.loadEntity();
+            return;
         }
+        this.route.paramMap.subscribe(_ => {
+            const snapshot = this.route.snapshot;
+            this.entityId = Number(snapshot.paramMap.get('id'));
+            this.editing = snapshot.data.editing;
+            this.loadEntity();
+        });
     }
 
     loadEntity() {
@@ -94,9 +94,7 @@ export abstract class BaseEntityForm<T> implements OnInit, OnDestroy {
                         this.close();
                         throw err;
                     }),
-                    finalize(() => {
-                        this.blockUI.stop();
-                    }),
+                    finalize(() => this.blockUI.stop()),
                     map((entity: T) => this.onLoadEntity(entity)),
                 ).subscribe();
         }
@@ -129,18 +127,17 @@ export abstract class BaseEntityForm<T> implements OnInit, OnDestroy {
                     this.close();
                     throw err;
                 }),
-                finalize(() => {
-                    this.blockUI.stop();
-                }),
+                finalize(() => this.blockUI.stop()),
                 map(res => {
                     this.close(res);
                     this.pageNotificationService.addSuccessMessage(messageKey);
                     return res;
                 })
-            ).subscribe(
+            )
+            .subscribe(
                 _ => {},
                 ({error: {errors}}) => errors.forEach(({defaultMessage}) => this.pageNotificationService.addErrorMessage(defaultMessage))
-                );
+            );
     }
 
     isInsert() {
@@ -166,6 +163,10 @@ export abstract class BaseEntityForm<T> implements OnInit, OnDestroy {
     formatToDate(date: any): Date {
         if (!date) {
             return null;
+        }
+
+        if (date instanceof Date) {
+            return date;
         }
 
         return new Date(`${date}T00:00:00-03:00`);

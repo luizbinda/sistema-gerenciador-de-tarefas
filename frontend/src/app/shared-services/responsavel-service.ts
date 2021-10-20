@@ -4,7 +4,7 @@ import {ResponsavelModel} from '../shared-models/responsavel-model';
 import {BaseEntityService} from '../utils/base-entity-service';
 
 @Injectable()
-export class ResponsavelService extends BaseEntityService<ResponsavelModel, any> {
+export class ResponsavelService extends BaseEntityService<ResponsavelModel, ResponsavelModel> {
 
     getEntity(): string {
         return 'responsavel';

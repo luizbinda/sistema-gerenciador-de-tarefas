@@ -15,8 +15,10 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import {HomeComponent} from './home/home.component';
 import {ResponsavelService} from './shared-services/responsavel-service';
-import {ReactiveFormsModule} from "@angular/forms";
-import {KeyFilterModule} from "primeng";
+import {ReactiveFormsModule} from '@angular/forms';
+import {KeyFilterModule} from 'primeng';
+import {ResponsavelFormComponent} from './home/reponsavel-form/responsavel-form.component';
+import {ResponsavelFormModalComponent} from './home/reponsavel-form/responsavel-form-modal.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,9 @@ import {KeyFilterModule} from "primeng";
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        HomeComponent
+        HomeComponent,
+        ResponsavelFormComponent,
+        ResponsavelFormModalComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -44,6 +48,9 @@ import {KeyFilterModule} from "primeng";
         MenuModule,
         ReactiveFormsModule,
         KeyFilterModule
+    ],
+    entryComponents: [
+        ResponsavelFormModalComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -1,3 +1,4 @@
+<p-button (onClick)="openResponsavelModal()">Novo Resposanvel</p-button>
 <app-generic-table class="ui-g-12"
                    #tableUser
                    [columns]="COLUMNS"
@@ -5,65 +6,6 @@
                    [filters]="FILTERS"
                    [showGlobalFilter]="true"
                    (loadItems)="updateTable($event)"
+                   [multiselect]="true"
 >
 </app-generic-table>
-<app-generic-form [modal]="false">
-    <form class="ui-g ui-fluid"
-          genericFormRef
-          [formGroup]="form" (submit)="saveForm($event)" novalidate>
-        <h1 class="ui-g-12" genericFormHeader>New User</h1>
-
-        <div class="ui-g form-group ui-g-12">
-
-            <div class="ui-g-12">
-                <app-generic-input class="ui-g-12 ui-md-6">
-                    <input
-                        type="text"
-                        pInputText
-                        sInputRef
-                        [maxLength]="10"
-                        [sLabel]="MSG.RESPONSAVEL_NOME"
-                        formControlName="nome"
-                    >
-                </app-generic-input>
-
-                <app-generic-input class="ui-g-12 ui-md-6">
-                    <p-calendar sInputRef
-                                dateFormat="dd-mm-yy"
-                                [sLabel]="MSG.RESPONSAVEL_DATA_NASCIMENTO"
-                                [showIcon]="true"
-                                [touchUI]="isMobile()"
-                                [readonlyInput]="isMobile()"
-                                [inputStyle]="{'width':'90%'}"
-                                formControlName="dataNascimento"
-                    >
-                    </p-calendar>
-                </app-generic-input>
-
-                <app-generic-input class="ui-g-12 ui-md-6">
-                    <input type="text" pInputText sInputRef
-                           [maxLength]="10"
-                           [sLabel]="MSG.RESPONSAVEL_EMAIL"
-                           formControlName="email">
-                </app-generic-input>
-            </div>
-        </div>
-
-        <div class="ui-g ui-g-12" genericFormFooterButtons>
-            <div class="ui-g-6 ui-md-2">
-                <button pButton type="submit"
-                        label="save"
-                        (click)="saveForm($event)"
-                        icon="ui-icon-save"></button>
-            </div>
-
-            <div class="ui-g-6 ui-md-2">
-                <button class="ui-button-secondary"
-                        pButton type="button" label="Limpar Formulario"
-                        (click)="clearForm()"
-                        icon="ui-icon-cancel"></button>
-            </div>
-        </div>
-    </form>
-
-</app-generic-form>

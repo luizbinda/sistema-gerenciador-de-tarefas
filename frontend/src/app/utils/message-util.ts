@@ -6,6 +6,8 @@ export class MessageUtil {
     public static PREVIOUS = 'anterior';
     public static NEXT = 'proximo';
     public static NEW = 'Cadastra novo';
+    public static EDIT = 'Editar';
+    public static VIEW = 'Visualizar';
     public static LOADING_SCREEN = 'Carregando ...';
     public static REQUIRED_FIELDS = 'Campos obrigatorio não preenchidos';
 
